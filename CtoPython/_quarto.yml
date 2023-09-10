@@ -3,12 +3,12 @@ project:
 
 book:
   title: "CtoPython"
-  author: "Norah Jones"
+  author: "David Peña Peralta"
   date: "9/9/2023"
   chapters:
     - index.qmd
-    - intro.qmd
-    - summary.qmd
+    - new_rules.qmd
+    - structure.qmd
     - references.qmd
 
 bibliography: references.bib

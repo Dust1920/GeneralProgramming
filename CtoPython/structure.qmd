@@ -1,0 +1,48 @@
+# Estructura de un Código.
+
+Un código en C en general consta de dos elementos. El préambulo, donde se encuentran los `#include<...>`, funciones creadas por el usuario, estructuras, entre otros, y el contenido (Lo que se encuentra en el `int main(){...}`). 
+
+A continuación recordaremos en que consistía el préambulo y el contenido en C. Y contaremos como funciona en Python. 
+
+## El préambulo. 
+
+De forma básica, el preámbulo es lo que se encuentra fuera del `int main(){...}`. Donde encontramos  
+
+* `#include<...>`.
+* `#define `.
+* `struct{...}`
+* Funciones creada por el usuario.
+
+### `#include<...>`
+En C, el comando `#include` se usa para llamar librerías nativas y funciones creadas por el usuario. Por el lado de Python esto se realiza mediante dos "funciones" `import` y `from`, creadas para cumplir con las necesidades del lenguaje. La "función" `from` se verá en el apartado "Novedades interesantes de Python" más adelante. Por el momento nos centraremos en `import`. 
+
+La función `import` es la que se encarga de llamar las librerías nativas de Python y las funciones creadas por el desarrollador. Teniendo el siguiente formato. 
+
+```{.python}
+import name
+```
+
+Una vez la librería es cargada, al usar una de sus funciones, indicarle a Python de donde la estamos sacando. Por ejemplo, si tengo una librería llamada 'algebra_lineal', y tengo una función para la factorización LU, llamada 'FLU'. En el código deberá aparecer algo como: algebra_lineal.FLU(...), lo cual no era necesario en C y aparte la escritura puede ser más lenta cuando las librerías tienen nombres largos. Lo cual es cierto, sin embargo hay dos cosas a comentar:
+
+Declarar la librería de origen permite tener funciones con el mismo nombre. Algo que en puede causar muchos problemas e incomodidades en C según el contexto, y La función `import` posee un parámetro opcional en el que nos permite asignar una abreviatura a la librería. Por ejemplo, con la librería 'algebra_lineal' y la función 'FLU'
+
+```{.python}
+import algebra_lineal as aL
+y = aL.FLU(A)
+```
+
+Más adelante detallaremos elementos como 'y', entonces notamos que al agregar `as` y una abreviatura, no necesitamos poner todo el nombre de la librería para llamar una función. Esto funciona de igual manera para las librerías nativas. 
+
+Como última cosa a mencionar como diferencia entre `#include` e `import` es que en C requerimos un script tipo C (.c) y otro tipo header (.h) para poder hacer la llamada, en Python solo se requiere el script de la librería (.py). Más adelante mencionaremos las bondades que tiene la función `import` a la hora de programar. 
+
+## `#define`
+
+Al no haber una función principal (`int main(){...}`), no son necesarias las constantes globales tipo `#define` como es en C, por lo tanto "desaparecen" dentro del lenguaje Python. 
+
+## `struct`
+Más adelante veremos la alternativa de `struct`, al estar apenas notando las primeras diferencias, por el momento les basta saber que existe.  
+
+### El contenido. 
+
+Sabemos que un script en C no es más que una función entera llamada 'main' (`int main(){...}`). En Python no se requiere una función para ejecutar el código escrito. Siendo necesario el clásico `return 0` de C. 
+

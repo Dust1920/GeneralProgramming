@@ -1,0 +1,75 @@
+# Nuevo lenguaje, nuevas reglas.
+
+La primera cosa a considerar al cambiar de lenguaje de programación son las nuevas reglas. Con reglas nos referimos a la escritura de código en general. En C por ejemplo, somos conscientes que toda linea debe terminar en un `;` . El código de cada `entorno` (for, while, switch, funciones, entre otros.) se delimitan por llaves `{ }` ( por ejemplo, for(...){}), sus argumentos se encierran entre paréntesis `( )`. Entonces repasaremos los cambios que se presentan Python.
+
+Comenzaremos mostrando él primer código que se realiza aprendiendo en C.
+
+```{C}
+#include <stdio.h>
+
+int main(){
+    printf("Hello World");
+    return 0;
+}
+```
+
+Ahora, veríamos el mismo código realizado en Python.
+
+```{python}
+print("Hola Mundo")
+```
+
+Ambos códigos hacen lo mismo, sin embargo notamos muchos cambios a simple vistas. Por el momento ignoraremos el preámbulo, y la función `int main()`.
+
+## El punto y coma ;.
+
+En C, el punto y coma `;` es ley y me atrevo a opinar que es el mayor causante errores de compilacion. Pues bien, en Python estos desaparecen por "completo".
+
+Notamos entonces que la función `print()` de Python, (la única línea del código de Python) no posee un punto y coma, a pesar que su "similar" en C `printf()` si lo tiene.
+
+El punto y coma no te generará error, ya que puede usarse para separar líneas de código. En general, para tus códigos de Python, puedes prescindir del `;`.
+
+## Las llaves {}.
+
+En la función `int main()` notamos que su contenido encuentra encerrado por llaves `{}`. Esto se aplica para funciones creadas por el usuario y para las funciones por defecto (`for()`, `switch()`, entre otros). En Python, las llaves desaparecen por "completo", entonces es sencillo preguntarse 
+*¿Cómo Python delimita las funciones?*.  
+
+### Dos puntos :
+Así como en C, el punto y coma `;` es ley. En Python es el dos puntos `:`, pero se usa de forma diferente, en las funciones básicas. Por ejemplo
+
+* En C tenemos `for(...){`
+* En Python tenemos `for[...]:`.
+
+:::{callout-note}
+## for en Python
+El `for` en Python no usa corchetes `[]`, solo señala que hay algo antes de los dos puntos, más adelante veremos como se traslada el `for` de C a Python. 
+:::
+
+### Indentación.
+Ya vimos como abrir una función (`:`), para separar el bloque de código de la función del resto del código se usa la indentación (tecla 'tab'). Es decir, 
+
+codigo base p1
+función
+    codigo 
+    de
+    función
+codigo base p2
+
+En este "ejemplo", vemos que el código de la función tiene una indentación, mientras que el código ajeno, esta alineado con el nombre de la función.
+
+:::{callout-note}
+¿Donde terminá "función"?
+:::
+
+Aquí función, hace referencia a `for`, `while`, `if` , entre otros. Más adelante trataremos mejor las funciones creadas por el usuario. 
+
+## PEP-8
+Algo importante a la hora de programar son tres cosas. 
+
+* Reproducibilidad. (Funcione en cualquier parte)
+* Claridad (Se entienda que esta pasanddo)
+* Facil de Leer. 
+
+En el caso de C, no hay reglas sobre como escribir un código más alla de la que se pueden encontrar en libros como "Clean Code" de Robert C.Martin. 
+
+Por el lado de Python, existe un proyecto llamado PEP-8 (https://peps.python.org/pep-0008/), en el que se estipulo un formato para un código de Python. Su relevancia es tal que, por ejemplo en un IDE de Python (PyCharm, más adelante hablaremos de él) puede configurarse para que, mediante advertencias, su código vaya tomando el formato PEP-8. 
