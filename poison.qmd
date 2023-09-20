@@ -153,9 +153,5 @@ $$
 Entonces 
 
 ```{python}
-poisson_walk = np.zeros(n_t)
 
-for i in range(n_t):
-    
-poisson_increment = prng.poisson()
 ```

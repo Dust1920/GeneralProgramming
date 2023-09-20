@@ -1,0 +1,37 @@
+# Definición
+Sea $(\Omega,\mathcal{F},\mathcal{P})$ un espacio medible, un proceso estocástico es una colección de v.a indexadas. $\mathbf{X}=\{X_t\}_{t\in T}$, donde $T$ es un conjunto arbitrario. Por el momento $T\subset\mathbb{R}$. 
+
+En general, un proceso estocástico puede verse como una caracteristica que va evolucionando según el tiempo. 
+* El precio de una acción.
+* La temperatura de una región
+* Entre otros. 
+
+Por ejemplo, considere la siguiente gráfica. 
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+weather = pd.read_csv("seattle-weather.csv")
+time = weather['date']
+theta = weather['temp_max']
+time = pd.to_datetime(time)
+theta = pd.to_numeric(theta)
+
+plt.plot(theta[:400])
+plt.title("Temperatura de Seattle")
+plt.xlabel("time")
+plt.ylabel("max_temp")
+plt.show()
+```
+
+Esta representa la temperatura de Seattle durante 400 dias. La temperatura de una región depende de muchos factores, por algo predecir las precipitaciones a tiempor real es complicado. Entonces, supongamos que $\mathbf{T}$ es un proceso estocástico tal que $T_t,t\in T$ es la temperatura de Seattle al tiempo $t$, entonces sería interesante intentar simular $\mathbf{T}$ a modo de poder "predecir" la temperatura el próximo año.
+
+Primero, definiremos el rango de estudio. 
+
+```{python}
+days = 400
+time_test = time[:days]
+temp_test = theta[:test]
+```
+
+Ahora, nos hacemos la pregunta. De donde partimos. Tal vez no seá claro en la gráfica, pero $\mathbf{T}$ puede verse como una caminata aleatoria, donde $p,q,h_1,h_2$ son desconocidos. Es decir, existe $\mathbf{X}$ tal que $X_i$ son v.a.i.i tales que $\mathcal{P}[X_i = h_1] = p,\mathcal{P}[X_i=-h_2] = q$. Entonces tenemos la tarea de encontrar $p,q$ dados $h_1,h_2>0$.  

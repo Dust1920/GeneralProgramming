@@ -1,0 +1,35 @@
+# Definición.
+
+Sea $(\Omega,\mathcal{F},\mathcal{P})$ un espacio medible, una variable aleatoria $X$ es una función
+$$
+X:\Omega \to \mathbb{R}
+$$
+
+Y, estará bien definida en $(\Omega,\mathcal{F},\mathcal{P})$ si para cada $A\in\mathcal{B}(\mathbb{R})$, $X^{-1}(A)\in \mathcal{F}$
+
+# Función de distribución.
+Por lo anterior, sea $X$ una v.a aleatoria bien definida, podemos definir una medida de probabilidad. 
+$$
+\mathcal{P}_X(A)=\mathcal{P}[X^{-1}(A)]
+$$
+
+Notemos que si $A_x=(-\infty,x],x\in\mathbb{R}$
+
+$$
+\mathcal{P}_X(A_x)=\mathcal{P}[X^{-1}(A_x)]=\mathcal{P}[X\leq x]
+$$
+
+Al lado derecho de la igualdad, es lo que comunmente se conoce como función de distribución. 
+
+$$
+F_X(x) = \mathcal{P}[X\leq x]
+$$
+
+Notemos que por definción, existe para toda v.a $X$ bien definida. 
+
+# Función de densidad. 
+Sea $X$ una v.a y $F_X$ su función de distribución. Decimos que $X$ tiene densidad si existe $f$ integrable tal que 
+$$
+F_X(x)=\int_{-\infty}^xf(x)\mathrm{d}x
+$$
+
