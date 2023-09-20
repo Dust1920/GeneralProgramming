@@ -1,0 +1,19 @@
+# Ajuste Circular
+Sean $\{p_n\}$ una colección de $n$ puntos del plano. Encontrar la circunferencia que minimice la distancia de los puntos hacia ella. 
+
+Primero, encontraremos el radio. Es decir, minimizar 
+$$
+F\left(x,y\right)=\sum_{i=1}^{N}\sqrt{\left(x_{i}-x\right)^{2}+\left(y_{i}-y\right)^{2}}
+$$
+
+Calculamos el gradiente 
+\begin{align*}
+\dfrac{\partial F}{\partial x} & =\sum_{i=1}^{N}\dfrac{-\left(x_{i}-x\right)}{\sqrt{\left(x_{i}-x\right)^{2}+\left(y_{i}-y\right)^{2}}}\\
+\dfrac{\partial F}{\partial y} & =\sum_{i=1}^{N}\dfrac{-\left(y_{i}-y\right)}{\sqrt{\left(x_{i}-x\right)^{2}+\left(y_{i}-y\right)^{2}}}
+\end{align*}
+
+Entonces, debemos minimizar 
+\begin{align*}
+\sum_{i=1}^{N}\left(x-x_{i}\right) & =0\\
+x & =\dfrac{1}{N}\sum_{i=1}^{N}x_{i}
+\end{align*}
