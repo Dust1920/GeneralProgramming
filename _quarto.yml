@@ -1,0 +1,23 @@
+project:
+  type: book
+
+book:
+  title: "practicasusana"
+  author: "Norah Jones"
+  date: "8/9/2023"
+  chapters:
+    - index.qmd
+    - brownian.qmd
+    - summary.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+
+

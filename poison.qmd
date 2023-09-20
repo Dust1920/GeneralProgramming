@@ -1,0 +1,161 @@
+# Procesos de Poisson
+
+## Teoría
+
+### Definicion
+
+Sean $\{T_k\}_{k\in T}$, v.a.i.i.d con distribución exponencial con parámetro $\lambda$.
+$$
+T_k\sim \exp(\lambda),\forall k
+$$
+
+, donde $T$ es un conjunto arbitrario. Un proceso de Poisson de parámetro $\lambda$ es el proceso a tiempo continuo $\{X_t\}_{t\in T}$ definido por 
+$$
+X_t = \max\left\{ n\geq 1: \sum_{i=1}^{n} T_i \leq t\right\},X_0 = 0
+$$ {#eq-poisson-process}
+
+De forma intuitiva podemos explicar a $X_t$ como el número de eventos que ha ocurrido al tiempo $t$.
+
+### Poisson y Gamma.
+
+Sean $X_i$ v.a.i.i.d con distribución exponencial con parámetro $\lambda$.
+
+$$
+G_n = \sum_{i=1}^n X_i \sim \Gamma(n,\lambda),
+$$
+
+Bajo esto, $G_n$ representa el tiempo real que ocurre esta el n-ésimo evento. Luego, por la definición se tiene la siguiente equivalencia. 
+$$
+(G_n\leq t)\equiv (X_t \geq n)
+$$ {#eq-equivalent}
+
+**Proposición** 
+Si $\{X_t\}_{t\geq 0}$ es un proceso estocástico de Poisson con parámetro $\lambda$, entonces 
+$$
+X_t \sim \text{Poisson}(\lambda t), t>0
+$$
+
+*Demostración* 
+Recordemos que 
+$$
+\mathcal{P}[G_n \leq t] = 1 - \exp(-\lambda t)\sum_{k=0}^{n-1} \dfrac{(\lambda t)^{k}}{k!}.
+$$
+
+Por otro lado, $\mathcal{P}[X_n = n] =\mathcal{P}[X_n \geq n] - \mathcal{P}[X_n \geq n + 1]$, usando (@eq-equivalent) tenemos que
+
+$$
+\mathcal{P}[X_n = n] = \exp(-\lambda t) \dfrac{(\lambda t)^{n}}{n!},
+$$
+
+la correspondiente a una Poisson$\sim (\lambda t)$. También, de forma similar al Browniano tenemos que 
+$$
+X_t - X_s \sim \text{Poisson}(\lambda t),t,s\in\mathbb{R},s<t.
+$$
+
+Finalmente, como $X_t\sim \text{Poisson}(\lambda t)$, entonces $E[X_t]=\lambda t $.
+
+## Implementación
+
+Ahora, queremos simular un proceso estocástico de Poisson con parámetro $\lambda$, aqui tenemos dos formas de hacerlo.
+
+-   Por la definición.
+-   Por las propiedades.
+
+Presentaremos ambas metodologías con su código correspondiente. Primero definimos los parámetros base.
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+
+t = 1  # Tiempo final ¿Por qué no hay un tiempo inicial?
+
+l = 1  # Parámetro lambda
+
+n_t = 2**(4)  # Numero de puntos.
+
+time = np.linspace(0,t,n_t)
+```
+
+A partir de aquí, el código cambiará según la metodología.
+
+### Por definición.
+
+Por (@eq-poisson-process), debemos saber cuando la suma "alcanza" t.
+
+::: {.callout-caution collapse="true"}
+## Generación de exponenciales con parámetro $\lambda$.
+
+```{python}
+r = np.random.exponential(scale = l, size = None)
+print(r)
+# ¿Cómo se haría a "mano"? (En C)
+prng = np.random.RandomState(10)
+prng.exponential(1,1)
+```
+
+:::
+
+
+```{python}
+prng = np.random.RandomState(10)  # Semilla generadora
+
+def x_t(p_lambda, t,k):
+    v = prng.exponential(p_lambda, k)
+    n = 0 
+    s = v[0]
+    while s < t:
+        n += 1
+        s += v[n]
+    return n
+```
+
+Una vez definido $X_t$, entonces podemos modelar el proceso. 
+
+```{python}
+mean = np.zeros(n_t)
+
+n_samples = 1
+
+for i in range(n_samples):
+    poisson_process = np.array([x_t(l, i, n_t) for i in time]).cumsum()
+    plt.plot(time, poisson_process, alpha = 0.5)
+    mean += np.array(poisson_process)
+mean = n_samples**(-1) * mean
+plt.plot(time, mean, 'r-')
+plt.show()
+
+```
+
+
+Ahora, veremos el proceder con sus propiedades. 
+## Por propiedades
+
+Por la definición del proceso de Poisson, se puede probar que satisface lo siguiente. (referencia: https://es.wikipedia.org/wiki/Proceso_de_Poisson)
+
+1. $X(0) = 0$
+2. Si $s\leq t$ entonces $N_s \leq N_t$
+3. Para $n>0,t_1 < t_2 <\ldots < t_n$ 
+4. Para toda $h>0$ y $t\in\mathbb{R}^{+}$ y $N_h$ y $N_{t+h}-N_{t}$ tienen la misma distribución.
+5. 
+6. 
+
+Omitiremos las propiedades 5 y 6 ya que en este caso, diremos que 
+$$
+X_t-X_s\sim \text{Poisson}(\lambda (t-s))
+$$
+
+Entonces, si $t=n+1,s=n$, tenemos que 
+
+$$
+X_{n+1} =X_n + \Delta X_{n}, \Delta X_n = X_{n+1} - X_{n},n\geq 0
+$$
+
+Entonces 
+
+```{python}
+poisson_walk = np.zeros(n_t)
+
+for i in range(n_t):
+    
+poisson_increment = prng.poisson()
+```
