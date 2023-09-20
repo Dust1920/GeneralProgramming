@@ -17,7 +17,7 @@ theta = weather['temp_max']
 time = pd.to_datetime(time)
 theta = pd.to_numeric(theta)
 
-plt.plot(theta[:400])
+plt.plot(theta)
 plt.title("Temperatura de Seattle")
 plt.xlabel("time")
 plt.ylabel("max_temp")
@@ -29,9 +29,9 @@ Esta representa la temperatura de Seattle durante 400 dias. La temperatura de un
 Primero, definiremos el rango de estudio. 
 
 ```{python}
-days = 400
+days = 50
 time_test = time[:days]
-temp_test = theta[:test]
+temp_test = theta[:days]
 ```
 
 Ahora, nos hacemos la pregunta. De donde partimos. Tal vez no seá claro en la gráfica, pero $\mathbf{T}$ puede verse como una caminata aleatoria, donde $p,q,h_1,h_2$ son desconocidos. Es decir, existe $\mathbf{X}$ tal que $X_i$ son v.a.i.i tales que $\mathcal{P}[X_i = h_1] = p,\mathcal{P}[X_i=-h_2] = q$. Entonces tenemos la tarea de encontrar $p,q$ dados $h_1,h_2>0$.  
